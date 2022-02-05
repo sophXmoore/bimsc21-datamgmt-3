@@ -18,6 +18,12 @@ var rightVal = 0;
 var topVal = 0;
 var leftVal = 0;
 
+//Materials
+const materialRed = new THREE.LineBasicMaterial( {
+	color: 0xff0000,
+	linewidth: 1,
+} );
+
 // Set up sliders and event listeners
 const xdim_slider = document.getElementById('X_Dim')
 xdim_slider.addEventListener('mouseup', onSliderChange, false)
@@ -192,14 +198,17 @@ async function compute() {
     loader.parse(buffer, function (object) {
         
         object.traverse(function (child) {
-            if (child.hasOwnProperty('name')) {
-                if (child.name == "junction"){
-                    child.material = Material;
+            /*
+            if (child.hasOwnProperty('myName')) {
+                if (child.myNname == "junction"){
+                    child.material = materialRed;
                 }
             }
+            */
         })
-        console.log(object)
-
+        //console.log(object.children[0].userData.attributes)
+        console.log(object);
+        
         scene.add(object)
         // hide spinner
         document.getElementById('loader').style.display = 'none'
